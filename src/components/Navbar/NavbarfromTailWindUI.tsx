@@ -10,11 +10,11 @@ const navigation = [
     { name: 'Calendar', href: '#', current: false },
 ]
 
-function classNames(...classes) {
+function classNames(...classes: any) {
     return classes.filter(Boolean).join(' ')
 }
 
-export default function Example() {
+export default function NAVBAR() {
     return (
         <Disclosure as="nav" className="bg-gray-800">
             {({ open }) => (
