@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { Route, Routes } from 'react-router-dom';
+import AddTodo from './components/AddTodo/AddTodo';
 import LogInPage from './components/login/LogInPage';
 import NAVBAR from './components/Navbar/NavbarfromTailWindUI';
 import NotFound from './components/NotFound/NotFound';
@@ -14,6 +15,7 @@ function App() {
           <Wrapper>
             <Routes>
               <Route path="/" element={<TodoList></TodoList>} />
+              <Route path="/addtodo" element={<AddTodo></AddTodo>} />
               <Route path="*" element={<NotFound></NotFound>} />
             </Routes>
           </Wrapper>

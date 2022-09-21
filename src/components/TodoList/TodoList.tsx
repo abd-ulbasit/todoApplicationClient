@@ -30,12 +30,15 @@ const TodoList = () => {
         })
     }, [])
     return (
-        <div className='w-full sm:w-9/12 border-red-400 mt-4 mx-auto shadow-none shadow-slate-800 p-2'
-        >{todos.map((each: TodoType) => {
-            console.log(each)
-            return <Todo data={each} key={each._id} ></Todo>
-        })
-            }</div>
+        <div className='w-100 '>
+
+            <div className='w-full sm:w-9/12 border-red-400 mt-4 mx-auto shadow-none shadow-slate-800 p-2 h-auto'
+            >{todos.map((each: TodoType) => {
+                console.log(each)
+                return <Todo data={each} key={each._id} ></Todo>
+            })
+                }</div>
+        </div>
     )
 }
 
