@@ -1,10 +1,14 @@
 import { Checkbox, TextareaAutosize, TextField } from '@mui/material'
+const USERNAME = 'basit'
 import React, { useState } from 'react'
 import "../../index.css"
 import StarRoundedIcon from '@mui/icons-material/StarRounded';
 import StarBorderRoundedIcon from '@mui/icons-material/StarBorderRounded';
+import { useNavigate } from 'react-router-dom';
+import { Todo } from '../../types/Types';
+import axios from 'axios';
 const NewTodoForm = () => {
-
+    const navigate = useNavigate();
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState('');
     const [isStarred, setIsStarred] = useState(false);
@@ -13,7 +17,30 @@ const NewTodoForm = () => {
     }
     const handleAddNewTodo: React.FormEventHandler = (e) => {
         e.preventDefault();
-        console.log(title, description,)
+        console.log(title, description, isStarred);
+        setTitle("");
+        setDescription("");
+        setIsStarred(false);
+        const newTodo: Todo = {
+            username: USERNAME,
+            title,
+            description,
+            isStarred,
+            isCompleted: false,
+            updatedOn: new Date(),
+            isArchived: false,
+        }
+        axios.post('http://localhost:5000/newtodo', newTodo).then(res => {
+            if (res.data.status === "success") {
+                console.log(res.data);
+                navigate('/');
+
+            }
+        }).catch(err => {
+            console.log(err);
+        }
+        )
+
     }
     const handleTitleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setTitle(event.target.value)
@@ -40,6 +67,7 @@ const NewTodoForm = () => {
                     <div className='' >
                         <Checkbox style={{ color: "slateblue" }}
                             onChange={handleIsStarred}
+                            checked={isStarred}
                             size={"large"}
                             icon={<StarBorderRoundedIcon></StarBorderRoundedIcon>} checkedIcon={<StarRoundedIcon></StarRoundedIcon>}
 
