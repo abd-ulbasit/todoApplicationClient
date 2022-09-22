@@ -1,9 +1,8 @@
-import { useState } from 'react'
 import { Route, Routes } from 'react-router-dom';
 import AddTodo from './components/AddTodo/AddTodo';
 import LogInPage from './components/login/LogInPage';
-import NAVBAR from './components/Navbar/NavbarfromTailWindUI';
-import NotFound from './components/NotFound/NotFound';
+import NotFound from './components/notfound or error/NotFound';
+import ServerError from './components/notfound or error/ServerError';
 import TodoList from './components/TodoList/TodoList';
 import Wrapper from './components/Wrapper';
 function App() {
@@ -16,6 +15,7 @@ function App() {
             <Routes>
               <Route path="/" element={<TodoList></TodoList>} />
               <Route path="/addtodo" element={<AddTodo></AddTodo>} />
+              <Route path="/servererror" element={<ServerError></ServerError>} />
               <Route path="*" element={<NotFound></NotFound>} />
             </Routes>
           </Wrapper>

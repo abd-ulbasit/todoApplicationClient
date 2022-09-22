@@ -29,13 +29,20 @@ const TodoList = () => {
             setTodos(res.data.data);
         })
     }, [])
+    const deleteTodo = (id: string) => {
+        setTodos((prev) => {
+            return prev.filter((todo: TodoType) => {
+                return todo._id != id
+            })
+        })
+    }
     return (
         <div className='w-100 '>
 
             <div className='w-full sm:w-9/12 border-red-400 mt-4 mx-auto shadow-none shadow-slate-800 p-2 h-auto'
             >{todos.map((each: TodoType) => {
                 console.log(each)
-                return <Todo data={each} key={each._id} ></Todo>
+                return <Todo data={each} key={each._id} deleteTodo={deleteTodo} ></Todo>
             })
                 }</div>
         </div>
