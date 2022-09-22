@@ -7,6 +7,7 @@ import relativeTime from 'dayjs/plugin/relativeTime'
 import { Checkbox } from '@mui/material'
 import StarRoundedIcon from '@mui/icons-material/StarRounded';
 import StarBorderRoundedIcon from '@mui/icons-material/StarBorderRounded';
+import Archive from '@mui/icons-material/Archive'
 dayjs.extend(relativeTime);
 type Props = {
     data: {
@@ -19,14 +20,15 @@ type Props = {
         isStarred: boolean,
     },
     deleteTodo: (a: string) => void,
-
+    archiveTodo: (a: string) => void
 }
-const Todo: FC<Props> = ({ deleteTodo, data: { title, description, _id, completed, archieved, isStarred, updatedOn } }) => {
+const Todo: FC<Props> = ({ deleteTodo, archiveTodo, data: { title, description, _id, completed, archieved, isStarred, updatedOn } }) => {
     const [isEdit, setIsEdit] = React.useState(false);
     const [Title, setTitle] = useState(title);
     const [Description, setDescription] = useState(description);
     const [UpdatedOn, setUpdatedOn] = useState(updatedOn);
-    const [IsStarred, setIsStarred] = useState(isStarred);
+    const [IsStarred, setIsStarred] = useState<boolean>(isStarred);
+    const [Archieved, setArchieved] = useState<boolean>(archieved);
     const navigate = useNavigate();
     console.log()
     const handleDeleteTodo = () => {
@@ -45,6 +47,26 @@ const Todo: FC<Props> = ({ deleteTodo, data: { title, description, _id, complete
         setIsEdit(true);
         // navigate(`/edittodo/${_id}`)
         // createPortal(<EditTodo></EditTodo>, document.getElementById('modal')! as HTMLElement)
+    }
+    const handleArchive = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setArchieved((prev) => {
+            // console.log(!prev);
+            const body = {
+                id: _id,
+                fieldToUpdate: { isArchived: !prev, updatedOn: new Date() }
+            }
+            axios.patch('http://localhost:5000/updatetodo', body).then((res) => {
+                if (res.status === 201) {
+                    archiveTodo(_id)
+                    // console.log("updated");
+                    // editTodo();
+                } else {
+                    console.log("server Error")
+                    navigate('/servererror')
+                }
+            })
+            return !prev
+        })
     }
     const handleStarredChanged = (event: React.ChangeEvent<HTMLInputElement>) => {
         console.log(IsStarred);
@@ -75,11 +97,17 @@ const Todo: FC<Props> = ({ deleteTodo, data: { title, description, _id, complete
     return (<>
         <div className='' >
 
-            <div className='border p-2 m-2 float-left' >
+            <div className='border  float-left flex flex-col' >
                 <Checkbox style={{ color: "slateblue" }}
                     onChange={handleStarredChanged}
                     checked={IsStarred}
                     icon={<StarBorderRoundedIcon></StarBorderRoundedIcon>} checkedIcon={<StarRoundedIcon></StarRoundedIcon>}
+
+                ></Checkbox>
+                <Checkbox style={{ color: "slateblue" }}
+                    onChange={handleArchive}
+                    checked={Archieved}
+                    icon={<Archive></Archive>} checkedIcon={<StarRoundedIcon></StarRoundedIcon>}
 
                 ></Checkbox>
             </div>
@@ -101,7 +129,7 @@ const Todo: FC<Props> = ({ deleteTodo, data: { title, description, _id, complete
             {/* <div>{updatedOn.toString()}</div> */}
                 {/* <div>{isStarred}</div> */}
                 {
-                    isEdit && <EditTodo setIsEdit={setIsEdit} editTodo={editTodo} data={{ title: Title, description: Description, _id, completed, archieved, isStarred: IsStarred, updatedOn: UpdatedOn }} ></EditTodo>
+                    isEdit && <EditTodo setIsEdit={setIsEdit} editTodo={editTodo} data={{ title: Title, description: Description, _id, completed, archieved: Archieved, isStarred: IsStarred, updatedOn: UpdatedOn }} ></EditTodo>
                 }
             </div >
         </div>
