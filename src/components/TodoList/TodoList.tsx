@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React, { useEffect } from 'react'
+import { } from '../../types/Types';
 import Todo from './Todo';
 const USERNAME = "basit";
 type TodoType = {
@@ -25,8 +26,11 @@ const TodoList = () => {
                 username: USERNAME
             }
         }).then((res) => {
-            console.log(res.data.data);
-            setTodos(res.data.data);
+            const todos = res.data.data
+            sortByStarred(todos);
+
+            // console.log(res.data.data);
+            setTodos(todos);
         })
     }, [])
     const deleteTodo = (id: string) => {
@@ -50,7 +54,7 @@ const TodoList = () => {
             <div className='w-100 '>
                 <div className='w-full sm:w-9/12 border-red-400 mt-4 mx-auto shadow-none shadow-slate-800 p-2 h-auto'
                 >{todos.map((each: TodoType) => {
-                    console.log(each)
+                    // console.log(each)
                     return <Todo data={each} key={each._id} deleteTodo={deleteTodo} archiveTodo={onArchiveTodo} ></Todo>
                 })
                     }</div>
@@ -64,4 +68,16 @@ const TodoList = () => {
     )
 }
 
-export default TodoList
+export default TodoList;
+export function sortByStarred(array: TodoType[]) {
+    array.sort(function (a: TodoType, b: TodoType): (1 | -1) {
+        if ((a.isStarred ? 0 : 1) > (b.isStarred ? 0 : 1)) return 1;
+        if ((a.isStarred ? 0 : 1) < (b.isStarred ? 0 : 1)) return -1;
+        const atime = new Date(a.updatedOn);
+        const btime = new Date(b.updatedOn);
+        if (atime.getTime() > btime.getTime()) return -1;
+        if (atime.getTime() < btime.getTime()) return 1;
+        return 1
+    })
+
+}

@@ -1,12 +1,13 @@
 import { Route, Routes } from 'react-router-dom';
 import AddTodo from './components/AddTodo/AddTodo';
+import ArchivedList from './components/ArchivedTodos/ArchivedList';
 import LogInPage from './components/login/LogInPage';
 import NotFound from './components/notfound or error/NotFound';
 import ServerError from './components/notfound or error/ServerError';
 import TodoList from './components/TodoList/TodoList';
 import Wrapper from './components/Wrapper';
 function App() {
-  const isAuthorized = true;
+  const isAuthorized = false;
   return (
     <div className='dark'>
       {isAuthorized &&
@@ -15,6 +16,7 @@ function App() {
             <Routes>
               <Route path="/" element={<TodoList></TodoList>} />
               <Route path="/addtodo" element={<AddTodo></AddTodo>} />
+              <Route path="/archivedtodos" element={<ArchivedList></ArchivedList>} />
               <Route path="/servererror" element={<ServerError></ServerError>} />
               <Route path="*" element={<NotFound></NotFound>} />
             </Routes>

@@ -1,3 +1,4 @@
+import Archive from '@mui/icons-material/Archive'
 import { NavLink } from 'react-router-dom'
 
 const Navbar = () => {
@@ -14,7 +15,16 @@ const Navbar = () => {
                 }
                 >Add a New Todo</NavLink>
             </div>
-            <button className='px-8 h-auto py-0 my-0 mr-4 border border-slate-900 rounded-xl font-medium hover:bg-slate-800 hover:text-white hover:scale-105 transition-all' >LogOut</button>
+            <div className='flex  justify-between items-center ' >
+                <NavLink to="/archivedtodos" className={({ isActive }) =>
+                    (isActive ? "hover:scale-105 transition-all bg-slate-800   text-white rounded-md " : " hover:scale-105 rounded-md  border border-slate-800")
+                }>
+                    <div className='p-1 px-4 mx-4 ' >
+                        <Archive></Archive>
+                    </div>
+                </NavLink>
+                <button className='px-8 h-auto py-2 my-0 mx-4 border border-slate-900 rounded-xl font-medium hover:bg-slate-800 hover:text-white hover:scale-105 transition-all' >LogOut</button>
+            </div>
         </div>
     )
 }
