@@ -1,11 +1,13 @@
 import axios from 'axios';
 const USERNAME = 'basit'
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { Todo } from '../../types/Types';
+import { AuthContext } from '../Context/AuthContext';
 import ArchivedTodo from './ArchivedTodo';
 let first = true;
 const ArchivedList = () => {
+    const authCtx = useContext(AuthContext);
     const navigate = useNavigate();
     const [archivedTodos, setArchivedTodos] = useState<Todo[]>([])
     useEffect(() => {
@@ -13,7 +15,7 @@ const ArchivedList = () => {
             first = false;
             axios.get('http://localhost:5000/archivedtodos', {
                 params: {
-                    username: USERNAME
+                    username: authCtx.userName
                 }
             }).then((res) => {
                 // console.log(res.data.data);
@@ -76,7 +78,7 @@ const ArchivedList = () => {
 
                 }
             </div>{archivedTodos.length === 0 && <div className='bg-slate-300 flex justify-center items-center  text-8xl font-black fixed h-screen w-screen pb-24 bg-clip-text text-transparent bg-gradient-to-r from-yellow-500 to-cyan-800 font-mono  ' >
-                Nothing in here!
+                Nothing here!
             </div>
             }
         </>

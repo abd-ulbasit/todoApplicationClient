@@ -1,13 +1,15 @@
 import { Checkbox, TextareaAutosize, TextField } from '@mui/material'
 const USERNAME = 'basit'
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import "../../index.css"
 import StarRoundedIcon from '@mui/icons-material/StarRounded';
 import StarBorderRoundedIcon from '@mui/icons-material/StarBorderRounded';
 import { useNavigate } from 'react-router-dom';
 import { Todo } from '../../types/Types';
 import axios from 'axios';
+import { AuthContext } from '../Context/AuthContext';
 const NewTodoForm = () => {
+    const authCtx = useContext(AuthContext);
     const navigate = useNavigate();
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState('');
@@ -21,8 +23,8 @@ const NewTodoForm = () => {
         setTitle("");
         setDescription("");
         setIsStarred(false);
-        const newTodo: Todo = {
-            username: USERNAME,
+        const newTodo = {
+            username: authCtx.userName,
             title,
             description,
             isStarred,

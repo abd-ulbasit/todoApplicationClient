@@ -1,8 +1,8 @@
 import axios from 'axios';
-import React, { useEffect } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { } from '../../types/Types';
+import { AuthContext } from '../Context/AuthContext';
 import Todo from './Todo';
-const USERNAME = "basit";
 type TodoType = {
     title: string,
     description: string,
@@ -15,6 +15,7 @@ type TodoType = {
 }
 let first = true;
 const TodoList = () => {
+    const authCtx = useContext(AuthContext);
     const [todos, setTodos] = React.useState([]);
     useEffect(() => {
         if (first) {
@@ -23,7 +24,7 @@ const TodoList = () => {
         }
         axios.get('http://localhost:5000/todolist', {
             params: {
-                username: USERNAME
+                username: authCtx.userName
             }
         }).then((res) => {
             const todos = res.data.data

@@ -1,13 +1,16 @@
+import { useContext } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import AddTodo from './components/AddTodo/AddTodo';
 import ArchivedList from './components/ArchivedTodos/ArchivedList';
+import { AuthContext } from './components/Context/AuthContext';
 import LogInPage from './components/login/LogInPage';
 import NotFound from './components/notfound or error/NotFound';
 import ServerError from './components/notfound or error/ServerError';
 import TodoList from './components/TodoList/TodoList';
 import Wrapper from './components/Wrapper';
 function App() {
-  const isAuthorized = false;
+  const authCtx = useContext(AuthContext);
+  const isAuthorized = authCtx.userName;
   return (
     <div className='dark'>
       {isAuthorized &&
