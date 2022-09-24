@@ -70,7 +70,7 @@ const NewTodoForm = () => {
                         <Checkbox style={{ color: "slateblue" }}
                             onChange={handleIsStarred}
                             checked={isStarred}
-                            size={"large"}
+                            size={"medium"}
                             icon={<StarBorderRoundedIcon></StarBorderRoundedIcon>} checkedIcon={<StarRoundedIcon></StarRoundedIcon>}
 
                         ></Checkbox>

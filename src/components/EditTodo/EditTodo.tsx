@@ -84,7 +84,7 @@ const EditTodo: FC<Props> = ({ setIsEdit, editTodo, data: {
                             <Checkbox style={{ color: "slateblue" }}
                                 onChange={handleIsStarred}
                                 checked={IsStarred}
-                                size={"large"}
+                                size={"medium"}
                                 icon={<StarBorderRoundedIcon></StarBorderRoundedIcon>} checkedIcon={<StarRoundedIcon></StarRoundedIcon>}
 
                             ></Checkbox>

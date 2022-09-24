@@ -16,7 +16,7 @@ const LogInForm = () => {
     }
     const handleformsubmit: React.FormEventHandler<HTMLFormElement> = (e) => {
         e.preventDefault();
-        console.log(username, password)
+        // console.log(username, password)
         if (hasAccount) {
             axios.post('http://localhost:5000/users', { username, password }).then((res) => {
                 console.log(res);
@@ -28,7 +28,7 @@ const LogInForm = () => {
                     setErrorMessage("Invalid Username or Password")
                     // alert("Invalid Username or Password")
                 } else if (res.status === 200) {
-                    console.log("authenticated");
+                    // console.log("authenticated");
                     authctx.setUserName(username);
                     localStorage.setItem("username", username)
                 }
