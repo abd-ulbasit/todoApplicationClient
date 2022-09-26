@@ -52,7 +52,7 @@ const TodoList = () => {
         <>{todos.length > 0 &&
 
 
-            <div className='w-100 bg-slate-200 dark:bg-slate-500 h-screen fixed overflow-auto pb-16'>
+            <div className='w-full   bg-slate-200 dark:bg-slate-500 h-screen fixed overflow-auto pb-16'>
                 <div className='w-full sm:w-9/12 border-red-400 pt-4 mx-auto shadow-none shadow-slate-800 p-2 h-auto  text-slate-900 transition-all'
                 >{todos.map((each: TodoType) => {
                     // console.log(each)
