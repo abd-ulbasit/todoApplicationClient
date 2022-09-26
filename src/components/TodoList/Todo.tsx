@@ -1,5 +1,5 @@
 import axios from 'axios'
-import React, { FC, useState } from 'react'
+import React, { FC, useContext, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import EditTodo, { EdittedTodo } from '../EditTodo/EditTodo'
 import dayjs from 'dayjs'
@@ -8,6 +8,7 @@ import { Checkbox } from '@mui/material'
 import StarRoundedIcon from '@mui/icons-material/StarRounded';
 import StarBorderRoundedIcon from '@mui/icons-material/StarBorderRounded';
 import Archive from '@mui/icons-material/Archive'
+import { ThemeContext } from '../Context/ThemeContext'
 dayjs.extend(relativeTime);
 type Props = {
 
@@ -24,6 +25,7 @@ type Props = {
     archiveTodo: (a: string) => void
 }
 const Todo: FC<Props> = ({ deleteTodo, archiveTodo, data: { title, description, _id, completed, archieved, isStarred, updatedOn } }) => {
+    const themeCtx = useContext(ThemeContext)
     const [isEdit, setIsEdit] = React.useState<boolean>(false);
     const [Title, setTitle] = useState(title);
     const [Description, setDescription] = useState(description);
@@ -65,11 +67,12 @@ const Todo: FC<Props> = ({ deleteTodo, archiveTodo, data: { title, description, 
                     navigate('/servererror')
                 }
             })
-            return !prev
+            return e.target.checked;
         })
     }
     const handleStarredChanged = (event: React.ChangeEvent<HTMLInputElement>) => {
         console.log(IsStarred);
+        console.log("In handle Stared");
         setIsStarred((prev) => {
             // console.log(!prev);
             const body = {
@@ -85,7 +88,7 @@ const Todo: FC<Props> = ({ deleteTodo, archiveTodo, data: { title, description, 
                     navigate('/servererror')
                 }
             })
-            return !prev
+            return event.target.checked;
         })
     }
     const editTodo = (a: EdittedTodo) => {
@@ -96,27 +99,28 @@ const Todo: FC<Props> = ({ deleteTodo, archiveTodo, data: { title, description, 
     }
     return (<>
 
-        <div className='float-left flex flex-col' >
-            <Checkbox style={{ color: "slateblue" }}
+        <div className='float-left flex flex-col -z-10' >
+            <Checkbox style={{ color: `${themeCtx.dark ? "white" : "slateblue"}` }}
                 onChange={handleStarredChanged}
                 checked={IsStarred}
                 icon={<StarBorderRoundedIcon></StarBorderRoundedIcon>} checkedIcon={<StarRoundedIcon></StarRoundedIcon>}
 
             ></Checkbox>
-            <Checkbox style={{ color: "slateblue" }}
+            <Checkbox style={{ color: `${themeCtx.dark ? "white" : "slateblue"}` }}
                 onChange={handleArchive}
                 checked={Archieved}
+                checkedIcon={<Archive></Archive>}
                 icon={<Archive></Archive>}
 
             ></Checkbox>
         </div>
-        <div className='flex m-2 p-2 border border-black rounded-md shadow-sm shadow-slate-600 hover:scale-[1.01] transition-all time  hover:bg-slate-100' >
+        <div className='flex m-2 p-2 border border-slate-900 rounded-md shadow-sm shadow-slate-600 hover:scale-[1.004] transition-all time  hover:bg-slate-100 flex-col md:flex-row dark:bg-slate-400 dark:hover:bg-slate-300 ' >
             <div className='p-2 pr-0 grow' >
-                <div className='flex justify-between '>
+                <div className='flex justify-between flex-col md:flex-row '>
                     <div className='text-lg font-semibold font-mono px-3  border-red-500' >{Title}</div>
-                    <div className='italic font-extralight text-xs w-35  border-pink-400' >Last Updated : {dayjs().to(dayjs(UpdatedOn))}</div>
+                    <div className='italic font-extralight text-xs w-35  border-pink-400 text-right mr-4' >Last Updated : {dayjs().to(dayjs(UpdatedOn))}</div>
                 </div>
-                <div className='text-slate-800' >{Description}</div>
+                <div className='' >{Description}</div>
             </div>
             <div className='flex flex-col p-2 col-span-5 justify-evenly'>
                 <button className='px-8 h-auto py-0 my-0 mr-4 border border-slate-900 rounded-xl font-medium hover:bg-slate-800 hover:text-white hover:scale-105 transition-all mb-2' onClick={handleDeleteTodo} >delete</button>

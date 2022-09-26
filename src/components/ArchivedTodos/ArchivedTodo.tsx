@@ -18,12 +18,11 @@ const ArchivedTodo: FC<Props> = ({ deleteForever, unarchive, todo: { username, _
         unarchive(_id)
     }
     return (
-        <div className='border flex flex-row  hover:scale-[1.01] rounded-md h-12 align-middle' >
+        <div className='border border-slate-400 flex flex-row  hover:scale-[1.01] rounded-md h-12 align-middle dark:border-slate-900 shadow-md hover:bg-slate-100 dark:hover:bg-slate-300' >
 
-            <button className='border h-auto  bg-slate-600 px-2 hover:bg-slate-700 rounded-md' onClick={HandleDeleteForever} ><DeleteForever></DeleteForever></button>
-            <div className='flex-grow p-2 text-slate-700 font-light text-sm [&:not(first-line)]:truncate h-16' >{title ? title : description}</div>
-            <button className='border h-auto px-2 bg-slate-600 hover:bg-slate-700 rounded-md' onClick={handleUnarchive} ><Unarchive></Unarchive></button>
-
+            <button className=' h-auto  bg-slate-400 px-2 hover:bg-slate-500 rounded-md dark:text-white dark:border-slate-900' onClick={HandleDeleteForever} ><DeleteForever></DeleteForever></button>
+            <div className='flex-grow p-2 font-light text-sm [&:not(first-line)]:truncate h-16 italic' >{title ? title : description}</div>
+            <button className=' h-auto px-2 bg-slate-400 hover:bg-slate-500 rounded-md dark:text-white border-slate-900' onClick={handleUnarchive} ><Unarchive></Unarchive></button>
 
         </div>
     )

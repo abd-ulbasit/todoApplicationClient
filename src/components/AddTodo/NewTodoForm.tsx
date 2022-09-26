@@ -8,7 +8,9 @@ import { useNavigate } from 'react-router-dom';
 import { Todo } from '../../types/Types';
 import axios from 'axios';
 import { AuthContext } from '../Context/AuthContext';
+import { ThemeContext } from '../Context/ThemeContext';
 const NewTodoForm = () => {
+    const themeCtx = useContext(ThemeContext)
     const authCtx = useContext(AuthContext);
     const navigate = useNavigate();
     const [title, setTitle] = useState("");
@@ -51,23 +53,23 @@ const NewTodoForm = () => {
         setDescription(e.target.value);
     }
     return (
-        <div className='bg-slate-300 rounded-md p-3 w-3/4 '  >
-            <form onSubmit={handleAddNewTodo} className="flex" >
+        <div className='bg-slate-300 rounded-md p-3 w-3/4 dark:bg-slate-400 text-slate-900'  >
+            <form onSubmit={handleAddNewTodo} className="flex  flex-col sm:flex-row" >
                 < div className='flex-grow'>
-                    <div className='flex flex-col' >
+                    <div className='flex flex-col g-3' >
                         <label htmlFor='title' >Title</label>
-                        <input id="title" type="text" className='p-1 resize-none rounded-md border-2
-                    focus:border-emerald-700 text-slate-600 font-semibold outline-0 ' value={title} onChange={handleTitleChange} />
+                        <input id="title" type="text" className='p-1 resize-y sm:resize-none rounded-md border-2
+                    focus:border-slate-900 text-slate-700 font-semibold outline-0 ' value={title} onChange={handleTitleChange} />
                     </div>
                     <div className='flex flex-col'>
                         <label htmlFor='description' >Description</label>
                         <textarea className='p-3 resize-none rounded-md border-2
-                    focus:border-emerald-700 text-slate-600 font-semibold outline-0 ' rows={3} value={description} onChange={handleDescriptionChange} ></textarea>
+                    focus:border-slate-900 text-slate-700 font-semibold outline-0 ' rows={3} value={description} onChange={handleDescriptionChange} ></textarea>
                     </div>
                 </div>
                 <div className='flex flex-col p-2 m-2 justify-between' >
                     <div className='' >
-                        <Checkbox style={{ color: "slateblue" }}
+                        <Checkbox style={{ color: `${themeCtx.dark ? "white" : "slateblue"}` }}
                             onChange={handleIsStarred}
                             checked={isStarred}
                             size={"medium"}
