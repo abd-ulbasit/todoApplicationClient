@@ -70,14 +70,14 @@ const EditTodo: FC<Props> = ({ setIsEdit, editTodo, data: {
     // const navigate = useNavigate();
     // console.log(Navigate);
     return (createPortal(<>
-        <div className='inset-0 fixed z-10 bg-slate-200 opacity-70' onClick={() => setIsEdit(false)} >
+        <div className='inset-0 fixed z-10 bg-slate-200 opacity-80 dark:opacity-100 dark:bg-slate-900 ' onClick={() => setIsEdit(false)} >
         </div>
-        <div className='bg-slate-200   z-20 inset-40  fixed rounded-xl'>
-            <div className=' text-slate-700 bg-slate-400 rounded-t-lg p-3 font-mono font-bold  ' >
+        <div className='bg-slate-200   z-20 inset-x-10 inset-y-40 sm:inset-x-20 md:inset-40  fixed rounded-xl text-slate-900 border border-slate-700 dark:bg-slate-500 '>
+            <div className='  bg-slate-500 rounded-t-lg p-3 font-mono font-bold  ' >
                 Edit Todo
             </div>
-            <form onSubmit={handleEditTodo}>
-                < div className='flex-grow px-2'>
+            <form onSubmit={handleEditTodo}  >
+                < div className='flex-grow px-2 '>
                     <div className='flex flex-col' >
                         <div className='flex align-middle justify-between items-baseline ' >
                             <label htmlFor='title' className='text-slate-700 font-semibold' >Title</label>
@@ -90,13 +90,13 @@ const EditTodo: FC<Props> = ({ setIsEdit, editTodo, data: {
                             ></Checkbox>
                         </div>
                         <input id="title" type="text" className='p-1 resize-none rounded-md border-2
-                    focus:border-emerald-700 text-slate-600 font-semibold outline-0 ' value={Title} onChange={handleTitleChange} />
+                    focus:border-slate-900 text-slate-600 font-semibold outline-0 ' value={Title} onChange={handleTitleChange} />
                     </div>
                     <div className='flex flex-col'>
                         <label htmlFor='description' className='font-semibold text-slate-700' >Description</label>
 
                         <textarea className='p-3 resize-none rounded-md border-2
-                    focus:border-emerald-700 text-slate-600 font-semibold outline-0 ' rows={3} value={Description} onChange={handleDescriptionChange} ></textarea>
+                    focus:border-slate-900 text-slate-600 font-semibold outline-0 ' rows={4} value={Description} onChange={handleDescriptionChange} ></textarea>
                     </div>
                 </div>
                 <div className='flex flex-col p-2 m-2 justify-between' >
