@@ -34,7 +34,7 @@ const NewTodoForm = () => {
             updatedOn: new Date(),
             isArchived: false,
         }
-        axios.post('http://localhost:5000/newtodo', newTodo).then(res => {
+        axios.post(`${import.meta.env.VITE_REQ_URL}addtodo`, newTodo).then(res => {
             if (res.data.status === "success") {
                 console.log(res.data);
                 navigate('/');

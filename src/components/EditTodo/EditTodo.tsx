@@ -48,7 +48,7 @@ const EditTodo: FC<Props> = ({ setIsEdit, editTodo, data: {
             id: _id,
             fieldToUpdate: edittedTodo
         }
-        axios.patch('http://localhost:5000/updatetodo', body).then((res) => {
+        axios.patch(`${import.meta.env.VITE_REQ_URL}updatetodo`, body).then((res) => {
             if (res.status === 201) {
                 editTodo(edittedTodo);
             } else {

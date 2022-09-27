@@ -35,7 +35,7 @@ const Todo: FC<Props> = ({ deleteTodo, archiveTodo, data: { title, description, 
     const navigate = useNavigate();
     console.log()
     const handleDeleteTodo = () => {
-        axios.delete(`http://localhost:5000/deletetodo/`, { data: { id: _id } }).then(res => {
+        axios.delete(`${import.meta.env.VITE_REQ_URL}deletetodo`, { data: { id: _id } }).then(res => {
             if (res.status === 204) {
                 // console.log(res.data);
                 // console.log("deleted");
@@ -57,7 +57,7 @@ const Todo: FC<Props> = ({ deleteTodo, archiveTodo, data: { title, description, 
                 id: _id,
                 fieldToUpdate: { isArchived: !prev, updatedOn: new Date() }
             }
-            axios.patch('http://localhost:5000/updatetodo', body).then((res) => {
+            axios.patch(`${import.meta.env.VITE_REQ_URL}updatetodo`, body).then((res) => {
                 if (res.status === 201) {
                     archiveTodo(_id)
                     // console.log("updated");
@@ -79,7 +79,7 @@ const Todo: FC<Props> = ({ deleteTodo, archiveTodo, data: { title, description, 
                 id: _id,
                 fieldToUpdate: { isStarred: !prev, updatedOn: new Date() }
             }
-            axios.patch('http://localhost:5000/updatetodo', body).then((res) => {
+            axios.patch(`${import.meta.env.VITE_REQ_URL}updatetodo`, body).then((res) => {
                 if (res.status === 201) {
                     // console.log("updated");
                     // editTodo();

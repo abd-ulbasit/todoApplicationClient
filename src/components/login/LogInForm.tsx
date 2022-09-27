@@ -8,7 +8,7 @@ const LogInForm = () => {
     const [password, setPassword] = React.useState('')
     const [hasAccount, setHasAccount] = React.useState(true);
     const handleUsernameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setUsername(event.target.value)
+        setUsername(event.target.value.trim())
     }
 
     const handlePasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -18,7 +18,7 @@ const LogInForm = () => {
         e.preventDefault();
         // console.log(username, password)
         if (hasAccount) {
-            axios.post('http://localhost:5000/users', { username, password }).then((res) => {
+            axios.post(`${import.meta.env.VITE_REQ_URL}users`, { username, password }).then((res) => {
                 console.log(res);
                 if (res.status === 204) {
                     // alert("NO USER Found")
@@ -36,7 +36,7 @@ const LogInForm = () => {
                 console.log(err);
             })
         } else {
-            axios.post('http://localhost:5000/newuser', { username, password }).then((res) => {
+            axios.post(`${import.meta.env.VITE_REQ_URL}newuser`, { username, password }).then((res) => {
 
                 if (res.status === 200) {
                     alert("USER already Exists")

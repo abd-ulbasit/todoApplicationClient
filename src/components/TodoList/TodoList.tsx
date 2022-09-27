@@ -16,13 +16,13 @@ type TodoType = {
 let first = true;
 const TodoList = () => {
     const authCtx = useContext(AuthContext);
-    const [todos, setTodos] = React.useState([]);
+    const [todos, setTodos] = React.useState<TodoType[]>([]);
     useEffect(() => {
         if (first) {
             first = false;
             return;
         }
-        axios.get('http://localhost:5000/todolist', {
+        axios.get(`${import.meta.env.VITE_REQ_URL}todolist`, {
             params: {
                 username: authCtx.userName
             }

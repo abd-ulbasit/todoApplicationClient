@@ -13,7 +13,7 @@ const ArchivedList = () => {
     useEffect(() => {
         if (true) {
             first = false;
-            axios.get('http://localhost:5000/archivedtodos', {
+            axios.get(`${import.meta.env.VITE_REQ_URL}archivedtodos`, {
                 params: {
                     username: authCtx.userName
                 }
@@ -26,7 +26,7 @@ const ArchivedList = () => {
     }, [])
     const handleDelete = (id: string) => {
 
-        axios.delete(`http://localhost:5000/deletetodo/`, { data: { id: id } }).then(res => {
+        axios.delete(`${import.meta.env.VITE_REQ_URL}deletetodo`, { data: { id: id } }).then(res => {
             if (res.status === 204) {
                 console.log('inside 204')
                 setArchivedTodos((prev) => {
@@ -47,7 +47,7 @@ const ArchivedList = () => {
             id: id,
             fieldToUpdate: { isArchived: false, updatedOn: new Date() }
         }
-        axios.patch('http://localhost:5000/updatetodo', body).then((res) => {
+        axios.patch(`${import.meta.env.VITE_REQ_URL}updatetodo`, body).then((res) => {
             if (res.status === 201) {
                 setArchivedTodos((prev) => {
                     let toUnarchive = prev.find((todo: Todo) => {
