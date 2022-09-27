@@ -77,7 +77,7 @@ const ArchivedList = () => {
                 })
 
                 }
-            </div>{archivedTodos.length === 0 && <div className='bg-slate-300 flex justify-center items-center  text-8xl font-black fixed h-screen w-screen pb-24 bg-clip-text text-transparent bg-gradient-to-r from-yellow-500 to-cyan-800 font-mono  ' >
+            </div>{archivedTodos.length === 0 && <div className='bg-slate-200 flex justify-center items-center  font-black fixed h-screen w-screen  pb-40 text-3xl  sm:text-6xl md:text-8xl text-slate-500 dark:bg-slate-500 dark:text-slate-700 ' >
                 Nothing here!
             </div>
             }

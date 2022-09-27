@@ -67,7 +67,7 @@ const LogInForm = () => {
 
                             <label className='mb-6'>UserName</label>
                         </div>
-                        <input type="text" className='p-1 rounded-md border-2
+                        <input type="text" className='p-1 rounded-md border-2 w-full
                     focus:border-slate-900 text-slate-600 font-semibold outline-0'value={username} minLength={5} onChange={handleUsernameChange} />
                     </div>
                     <div className='w-100 mb-2'>
@@ -75,7 +75,7 @@ const LogInForm = () => {
                             <label>Password</label>
                         </div>
                         <input type="password" minLength={5} value={password} className='p-1 rounded-md border-2 
-                        tracking-widest
+                        tracking-widest w-full
                     focus:border-slate-900 text-slate-600 font-semibold outline-0' onChange={handlePasswordChange} />
                     </div>
                 </div>
