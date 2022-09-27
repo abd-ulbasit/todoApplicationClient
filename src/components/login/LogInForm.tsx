@@ -1,12 +1,12 @@
-import React, { useContext, useState } from 'react'
+import { useContext, useState } from 'react'
 import axios from 'axios'
 import { AuthContext } from '../Context/AuthContext'
 const LogInForm = () => {
     const [errorMessage, setErrorMessage] = useState('')
     const authctx = useContext(AuthContext);
-    const [username, setUsername] = React.useState('')
-    const [password, setPassword] = React.useState('')
-    const [hasAccount, setHasAccount] = React.useState(true);
+    const [username, setUsername] = useState('')
+    const [password, setPassword] = useState('')
+    const [hasAccount, setHasAccount] = useState(true);
     const handleUsernameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setUsername(event.target.value.trim())
     }
