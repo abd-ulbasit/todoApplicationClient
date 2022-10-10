@@ -1,6 +1,6 @@
 import axios from 'axios';
-const USERNAME = 'basit'
-import React, { useContext, useEffect, useState } from 'react'
+import AutoAnimate from "@formkit/auto-animate"
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { Todo } from '../../types/Types';
 import { AuthContext } from '../Context/AuthContext';
@@ -68,9 +68,14 @@ const ArchivedList = () => {
             alert(err.message)
         })
     }
+    const divref = useRef<HTMLDivElement>(null)
+    // const [listref]=useAut
+    useEffect(() => {
+        divref.current && AutoAnimate(divref.current)
+    }, [divref])
     return (
         <div className='bg-slate-200 dark:bg-slate-500 h-screen w-full my-0 fixed overflow-auto text-slate-900'>
-            <div className='grid grid-cols-1  sm:grid-cols-1 md:grid-cols-2 my-0  w-4/6 mx-auto gap-4 p-3 m-3 ' >
+            <div className='grid grid-cols-1  sm:grid-cols-1 md:grid-cols-2 my-0  w-4/6 mx-auto gap-4 p-3 m-3 ' ref={divref} >
                 {archivedTodos.map((todo: Todo) => {
                     console.log("Renendered");
                     return <ArchivedTodo key={todo._id} deleteForever={handleDelete} unarchive={unarchive} todo={todo} ></ArchivedTodo>

@@ -1,8 +1,9 @@
 import axios from 'axios';
-import React, { useContext, useEffect } from 'react'
+import React, { useContext, useEffect, useRef } from 'react'
 import { } from '../../types/Types';
 import { AuthContext } from '../Context/AuthContext';
 import Todo from './Todo';
+import AutoAnimate from "@formkit/auto-animate"
 type TodoType = {
     title: string,
     description: string,
@@ -48,12 +49,18 @@ const TodoList = () => {
             })
         })
     }
+    //this will be helping in the animation 
+    const divref = useRef<HTMLDivElement>(null)
+    // const [listref]=useAut
+    useEffect(() => {
+        divref.current && AutoAnimate(divref.current)
+    }, [divref])
     return (
         <>{todos.length > 0 &&
 
 
             <div className='w-full   bg-slate-200 dark:bg-slate-500 h-screen fixed overflow-auto pb-16'>
-                <div className='w-full sm:w-9/12 border-red-400 pt-4 mx-auto shadow-none shadow-slate-800 p-2 h-auto  text-slate-900 transition-all'
+                <div className='w-full sm:w-9/12 border-red-400 pt-4 mx-auto shadow-none shadow-slate-800 p-2 h-auto  text-slate-900 transition-all' ref={divref}
                 >{todos.map((each: TodoType) => {
                     // console.log(each)
                     return <Todo data={each} key={each._id} deleteTodo={deleteTodo} archiveTodo={onArchiveTodo} ></Todo>
